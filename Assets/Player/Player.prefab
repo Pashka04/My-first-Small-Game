@@ -147,7 +147,6 @@ MonoBehaviour:
   attackPoint: {fileID: 8235190663153783999}
   attackRange: 0.7
   attackDamage: 2
-  attackBonus: 1
   attackRate: 2
   enemyLayers:
     serializedVersion: 2
@@ -192,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 3
   currentHealth: 0
-  transitionAnim: {fileID: 0}
+  transitionAnim: {fileID: 8235190663100823975}
 --- !u!95 &8235190663100823975
 Animator:
   serializedVersion: 3
