@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Coin
   - Platform
+  - Trigger
   layers:
   - Default
   - TransparentFX

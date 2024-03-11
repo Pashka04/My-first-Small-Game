@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5265012441305866987}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'RightEnge '
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,9 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5265012441404854850}
   - component: {fileID: 5265012441404854849}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyPatrol 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5265012442491671746}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftEnge
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}

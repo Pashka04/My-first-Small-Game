@@ -132,14 +132,28 @@ public class PlayerController : MonoBehaviour
     private void Hit()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        
         
         foreach (Collider2D enemy in hitEnemies)
         {
 
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
             
 
+            if (enemy.TryGetComponent<Enemy>(out Enemy component))
+            {
+                component.TakeDamage(attackDamage);
+            }
+            else if (enemy.TryGetComponent<HealthBoss>(out HealthBoss health))
+            {
+                health.TakeDamage(attackDamage);
+            }
+
+
+
+
         }
+
     }
 
     private void OnTriggerStay2D(Collider2D other)

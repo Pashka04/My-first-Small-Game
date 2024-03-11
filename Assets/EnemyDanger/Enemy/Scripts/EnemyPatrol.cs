@@ -11,6 +11,8 @@ public class EnemyPatrol : MonoBehaviour
     [Header("Enemy")]
     [SerializeField] private Transform enemy;
 
+    BossHealth bosshealth;
+   
     [Header("Movement parameters")]
     [SerializeField] private float speed;
     private Vector3 initScale;
@@ -69,7 +71,7 @@ public class EnemyPatrol : MonoBehaviour
         
     }
 
-    private void DirectionChange()
+    public void DirectionChange()
     {
         anim.SetBool("Moving", false);
            idleTimer += Time.deltaTime;
@@ -91,4 +93,17 @@ public class EnemyPatrol : MonoBehaviour
         enemy.position = new Vector3(enemy.position.x + Time.deltaTime * _direction * speed,
             enemy.position.y, enemy.position.z);
     }
+
+    void Disable()
+    {
+        if (bosshealth.health <= 10)
+        {
+            this.enabled = false;
+        }
+
+        
+
+    }
 }
+
+
