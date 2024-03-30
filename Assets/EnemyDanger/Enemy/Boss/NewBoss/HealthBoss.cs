@@ -6,8 +6,8 @@ using UnityEngine;
 public class HealthBoss : MonoBehaviour
 {
     [SerializeField] public int maxHealth = 5;
-    [SerializeField] private int currentHealth;
-    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] public int currentHealth;
+    
 
     [SerializeField] Animator bossAnimator;
 
@@ -16,25 +16,43 @@ public class HealthBoss : MonoBehaviour
         bossAnimator = GetComponent<Animator>();
     }
 
-    void Die()
+    private void Start()
     {
-        Debug.Log("Boss died!");
-
-        bossAnimator.SetBool("IsDie", true);
-
-        GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
+        currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
         currentHealth -= damage;
 
         bossAnimator.SetTrigger("Hurt");
+        
+        return true;
+        
+    }
 
+    public bool CheckDeath()
+    {
         if (currentHealth <= 0)
         {
-            Die();
+            return true;
+            
         }
+        return false;
     }
+
+    
+    public void Die()
+    {
+        Debug.Log("Boss died!");
+        bossAnimator.SetBool("IsDie", true);
+        this.enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+
+
+
+    }
+
+   
 }

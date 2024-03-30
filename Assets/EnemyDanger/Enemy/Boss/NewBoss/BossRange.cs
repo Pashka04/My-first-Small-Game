@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,8 @@ public class BossRange : MonoBehaviour
 
     Rigidbody2D rigidbody2d;
     Animator anim;
-
+    [SerializeField] HealthBoss healthBoss;
+    public bool IsRun = false;
     private void Awake()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -21,41 +23,82 @@ public class BossRange : MonoBehaviour
 
     private void Update()
     {
-        //дистанция до игрока
-        float distToPlayer = Vector2.Distance(transform.position, player.position);
+        //if (!IsRun)
+        //{
+        //    return;
+        //}
+        
+        //if (healthBoss.currentHealth <= 0)
+        //{
 
-        if (distToPlayer < agroRange)
+        //    return;
+
+        //}
+
+        ////дистанция до игрока
+        //float distToPlayer = Vector2.Distance(transform.position, player.position);
+
+        //if (distToPlayer < agroRange)
+        //{
+        //    ChasePlayer();
+        //}
+        //else
+        //{
+        //    StopChasingPlayer();
+        //}
+
+
+    }
+
+    void ChasePlayer()
+    {
+        if (transform.position.x < player.position.x)
         {
-            ChasePlayer();
+            rigidbody2d.velocity = new Vector2(moveSpeed, 0);
+            transform.localScale = new Vector2(1, 1);
         }
         else
         {
-            StopChasingPlayer();
+            rigidbody2d.velocity = new Vector2(-moveSpeed, 0);
+            transform.localScale = new Vector2(-1, 1);
         }
 
-        void ChasePlayer()
-        {
-            if (transform.position.x < player.position.x)
-            {
-                rigidbody2d.velocity = new Vector2(moveSpeed, 0);
-                transform.localScale = new Vector2(1, 1);
-            }
-            else 
-            {
-                rigidbody2d.velocity = new Vector2(-moveSpeed, 0);
-                transform.localScale = new Vector2(-1, 1);
-            }
-
-            anim.Play("Run");
-        }
-
-        void StopChasingPlayer()
-        {
-            rigidbody2d.velocity = new Vector2(0, 0);
-            anim.Play("Idle");
-        }
+        anim.Play("Run");
     }
 
-        //return это для того что бы персонаж не двигался (записать это в новом скрипте дед черещ if )
-    
+    internal bool PlayerOutOfRange()
+    {
+        
+        float distToPlayer = Vector2.Distance(transform.position, player.position);
+
+        if (distToPlayer > agroRange)
+        {
+            StopChasingPlayer();
+            return true;
+        }
+        else
+        {
+            ChasePlayer();
+            return false;
+            
+            
+        }
+        
+        
+    }
+
+    public void StopChasingPlayer()
+    {
+        rigidbody2d.velocity = new Vector2(0, 0);
+        anim.Play("Idle");
+    }
+
+   
+
+
+
 }
+
+
+
+

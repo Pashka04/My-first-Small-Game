@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 2867691668325817548}
   - component: {fileID: 2867691668325817549}
   - component: {fileID: 2867691668325817539}
-  - component: {fileID: 7888703338285496240}
+  - component: {fileID: 5144752364187135735}
   - component: {fileID: 238079486705332452}
-  - component: {fileID: -5645063558003028862}
-  - component: {fileID: 99024387877016784}
+  - component: {fileID: 4276931738200415168}
+  - component: {fileID: 547953659421597555}
+  - component: {fileID: 57521672237923231}
+  - component: {fileID: 4076741614513570067}
   m_Layer: 6
   m_Name: EnemyBoss2
   m_TagString: Enemy
@@ -108,8 +110,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &7888703338285496240
-CapsuleCollider2D:
+--- !u!61 &5144752364187135735
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -121,9 +123,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1605835, y: -0.81437683}
-  m_Size: {x: 0.70214844, y: 1.7121887}
-  m_Direction: 0
+  m_Offset: {x: 0.1505127, y: -0.78027344}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.3333335, y: 3.7}
+    newSize: {x: 2, y: 1.3875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.65771484, y: 1.5422974}
+  m_EdgeRadius: 0
 --- !u!95 &238079486705332452
 Animator:
   serializedVersion: 3
@@ -143,7 +155,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-5645063558003028862
+--- !u!114 &4276931738200415168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867691668325817547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d24bc275584c1419a2619f70100dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &547953659421597555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,11 +181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   currentHealth: 20
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
   bossAnimator: {fileID: 238079486705332452}
---- !u!114 &99024387877016784
+--- !u!114 &57521672237923231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,5 +195,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  agroRange: 4
-  moveSpeed: 2
+  agroRange: 0
+  moveSpeed: 0
+  healthBoss: {fileID: 0}
+  IsRun: 0
+--- !u!114 &4076741614513570067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867691668325817547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eefdf4666fd3d3f4398d32552154a958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 0
+  range: 0
+  colliderDistance: 0
+  damage: 0
+  boxCollider: {fileID: 0}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
