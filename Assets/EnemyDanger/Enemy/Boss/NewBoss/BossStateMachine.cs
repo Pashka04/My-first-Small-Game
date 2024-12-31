@@ -19,6 +19,7 @@ public class BossStateMachine : MonoBehaviour
     AttackBoss attackBoss;
     HealthBoss healthBoss;
     BossRange bossRange;
+    
 
     private void Awake()
     {
@@ -26,8 +27,11 @@ public class BossStateMachine : MonoBehaviour
         attackBoss = GetComponent<AttackBoss>();
         healthBoss = GetComponent<HealthBoss>();
         bossRange = GetComponent<BossRange>();
+       
     }
 
+    
+    
     void Start()
     {
         TransitionToState(BossState.Idle);
@@ -35,49 +39,80 @@ public class BossStateMachine : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(currentState.ToString());
+
         switch (currentState)
         {
             case BossState.Idle:
-                anim.Play("Idle");
+                bossRange.StopChasingPlayer();
+
                 if (attackBoss.PlayerInSight())
                 {
                     TransitionToState(BossState.Attack);
                 }
-                break;
+               
+                else if (!bossRange.PlayerOutOfRange())
+                {
+                    TransitionToState(BossState.Run);
+                }
+               
+                else if (healthBoss.currentHealth <= 0)
+               {
+                    TransitionToState(BossState.Die);
+               }
+                else if (healthBoss.isTakeDamage)
+                {
+
+                    TransitionToState(BossState.Hurt);
+
+                }
+                    break;
 
             case BossState.Attack:
                 anim.SetTrigger("Attack");
                 if (!attackBoss.PlayerInSight())
                 {
-                    TransitionToState(BossState.Run);
+                    TransitionToState(BossState.Idle);
                 }
-                break;
+               else if (healthBoss.currentHealth <= 0)
+                {
+                    TransitionToState(BossState.Die);
+                }
+                else if (healthBoss.isTakeDamage)
+                {
+                    TransitionToState(BossState.Hurt);
+                }
+                    break;
 
             case BossState.Run:
                 bossRange.IsRun = true;
+                bossRange.ChasePlayer();
+                anim.Play("Run");
                 if (bossRange.PlayerOutOfRange())
                 {
                     TransitionToState(BossState.Idle);
                 }
-                if (healthBoss.TakeDamage())
+               else if (attackBoss.PlayerInSight())
+                {
+                    TransitionToState(BossState.Attack);
+                }
+               else if (healthBoss.currentHealth <= 0)
+                {
+                    TransitionToState(BossState.Die);
+                }
+                else if (healthBoss.isTakeDamage)
                 {
                     TransitionToState(BossState.Hurt);
-
                 }
+                
+
                 break;
 
             case BossState.Hurt:
-                anim.SetTrigger("Hurt");
-                if (healthBoss.currentHealth > 0)
+              
+                if(healthBoss.isTakeDamage == false)
                 {
-
-                    bossRange.StopChasingPlayer();
                     TransitionToState(BossState.Idle);
-
-                    
-                    // Implement retreat behavior here
-                    // For example, move back or teleport
-
                 }
                 if(healthBoss.currentHealth <= 0)
                 {
@@ -90,7 +125,7 @@ public class BossStateMachine : MonoBehaviour
                 if (healthBoss.currentHealth <= 0)
                 {
                     healthBoss.Die();
-                    // Add any additional actions for when the boss dies
+                    
                 }
                 break;
 

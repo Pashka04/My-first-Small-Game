@@ -5,15 +5,19 @@ using UnityEngine;
 
 public class HealthBoss : MonoBehaviour
 {
-    [SerializeField] public int maxHealth = 5;
-    [SerializeField] public int currentHealth;
-    
+    [SerializeField] public float maxHealth = 20;
+    [SerializeField] public float currentHealth;
+
+    public goldenKey prefab;
 
     [SerializeField] Animator bossAnimator;
+    [SerializeField] BossStateMachine stateMachine;
+    [SerializeField] ImageController imageController;
 
     private void Awake()
     {
         bossAnimator = GetComponent<Animator>();
+        imageController = GetComponent<ImageController>();
     }
 
     private void Start()
@@ -21,14 +25,22 @@ public class HealthBoss : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public bool TakeDamage(int damage)
+    public bool isTakeDamage = false;
+    
+    public void TakeDamage(int damage)
     {
+        isTakeDamage = true;
+        
         currentHealth -= damage;
 
         bossAnimator.SetTrigger("Hurt");
+
+                
+    }
         
-        return true;
-        
+    public void isHurt()
+    {
+        isTakeDamage = false;
     }
 
     public bool CheckDeath()
@@ -46,13 +58,20 @@ public class HealthBoss : MonoBehaviour
     {
         Debug.Log("Boss died!");
         bossAnimator.SetBool("IsDie", true);
+        //imageController.triggerObject1.SetActive(false);
+        //imageController.triggerObject2.SetActive(false);
+        //imageController.triggerObject3.SetActive(false);
         this.enabled = false;
         GetComponent<Collider2D>().enabled = false;
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        Instantiate(prefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z),Quaternion.identity);
+        Destroy(stateMachine);
 
+        
 
 
     }
+    
 
    
 }

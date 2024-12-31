@@ -9,8 +9,15 @@ public class StaminaManager : MonoBehaviour
     private float stamina = 100;
     public float staminaAttack = 15;
     public float staminaJump = 10;
+    Animator animator;
     [SerializeField] private Image slider;
+    PlayerController playerController;
 
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     public bool WasteOfStaminaAttack()
     {
         if (stamina >= staminaAttack)
@@ -61,6 +68,8 @@ public class StaminaManager : MonoBehaviour
         }
         
     }
+
+    
     
     
 

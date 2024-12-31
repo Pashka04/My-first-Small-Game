@@ -19,7 +19,9 @@ public class BossRange : MonoBehaviour
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
+
 
     private void Update()
     {
@@ -50,20 +52,45 @@ public class BossRange : MonoBehaviour
 
     }
 
-    void ChasePlayer()
+    
+     public void ChasePlayer()
     {
+        float distToPlayer = Vector2.Distance(transform.position, player.position);
+
         if (transform.position.x < player.position.x)
         {
-            rigidbody2d.velocity = new Vector2(moveSpeed, 0);
+            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
             transform.localScale = new Vector2(1, 1);
         }
-        else
+        else if (transform.position.x > player.position.x)
         {
-            rigidbody2d.velocity = new Vector2(-moveSpeed, 0);
+            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
             transform.localScale = new Vector2(-1, 1);
         }
 
-        anim.Play("Run");
+
+
+
+        //Vector2 movement;
+        //if (transform.position.x < player.position.x)
+        //{
+        //    movement = new Vector2((-1) * moveSpeed, rigidbody2d.velocity.y);
+        //    transform.localScale = new Vector2(1, 1);
+        //}
+        //else if (transform.position.x > player.position.x)
+        //{
+        //    movement = new Vector2((1) * moveSpeed, rigidbody2d.velocity.y);
+        //    transform.localScale = new Vector2(-1, 1);
+        //}
+        //else
+        //{
+        //    movement = new Vector2();
+
+        //}
+        //Debug.Log(movement);
+        //rigidbody2d.velocity = movement;
+
+
     }
 
     internal bool PlayerOutOfRange()
@@ -73,12 +100,12 @@ public class BossRange : MonoBehaviour
 
         if (distToPlayer > agroRange)
         {
-            StopChasingPlayer();
+           
             return true;
         }
         else
         {
-            ChasePlayer();
+            
             return false;
             
             

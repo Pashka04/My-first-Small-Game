@@ -40,14 +40,14 @@ public class Shop : MonoBehaviour
     public void BuyShop()
     {
         Debug.Log("Клик");
-        int coins = PlayerPrefs.GetInt("coins");
+        int coin = coinBank.GetCoinsCollected();
 
         if (access == 0)
         {
-            if (coins >= price)
+            if (coin >= price)
             {
                 PlayerPrefs.SetInt(objectName + "Access", 1);
-                PlayerPrefs.SetInt("coins", coins - price);
+                coinBank.RemoveCoin(price);
                 AccessUpdate();
             }
         }

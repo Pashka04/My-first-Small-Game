@@ -19,7 +19,11 @@ public class CoinBank : MonoBehaviour
         coinBankData.coinSpawnerIDs.Add(SpawnerID);
         SaveData();
     }
-
+    public void RemoveCoin(int value)
+    {
+        coinBankData.coinsCollected -= value;
+        SaveData();
+    }
     public int GetCoinsCollected()
     {
         return coinBankData.coinsCollected;

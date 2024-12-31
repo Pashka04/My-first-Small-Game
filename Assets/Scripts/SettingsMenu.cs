@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public Dropdown resolutionDropdown;
+    //public Dropdown resolutionDropdown;
     public Dropdown qualityDropdown;
 
     Resolution[] resolutions;
 
     void Start()
     {
-        resolutionDropdown.ClearOptions();
+        //resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
         resolutions = Screen.resolutions;
         int currentResolutionIndex = 0;
@@ -26,16 +26,16 @@ public class SettingsMenu : MonoBehaviour
                 currentResolutionIndex = i;
         }
 
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.RefreshShownValue();
-        LoadSettings(currentResolutionIndex);
+        //resolutionDropdown.AddOptions(options);
+        //resolutionDropdown.RefreshShownValue();
+        //LoadSettings(currentResolutionIndex);
     }
 
-    public void SetResolution(int resolutionIndex)
-    {
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-    }
+    //public void SetResolution(int resolutionIndex)
+    //{
+    //    Resolution resolution = resolutions[resolutionIndex];
+    //    Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    //}
 
     public void SetQuality(int qualityIndex)
     {
@@ -45,25 +45,26 @@ public class SettingsMenu : MonoBehaviour
     public void SaveSettings()
     {
         PlayerPrefs.SetInt("QualitySettingPreference", qualityDropdown.value);
-        PlayerPrefs.SetInt("ResolutionPreference", resolutionDropdown.value);
+        //    PlayerPrefs.SetInt("ResolutionPreference", resolutionDropdown.value);
+        //}
+        //    public void LoadSettings(int currentResolutionIndex)
+        //    {
+        //        if (PlayerPrefs.HasKey("QualitySettingPreference"))
+        //            qualityDropdown.value = PlayerPrefs.GetInt("QualitySettingPreference");
+        //        else
+        //        {
+        //            qualityDropdown.value = 3;
+        //        }
+        //        if (PlayerPrefs.HasKey("ResolutionPreference"))
+        //            //resolutionDropdown.value = PlayerPrefs.GetInt("ResolutionPreference");
+        //        else
+        //        {
+        //            //resolutionDropdown.value = currentResolutionIndex;
+        //        }
+        //    }       
+
+
+
     }
-    public void LoadSettings(int currentResolutionIndex)
-    {
-        if (PlayerPrefs.HasKey("QualitySettingPreference"))
-            qualityDropdown.value = PlayerPrefs.GetInt("QualitySettingPreference");
-        else
-        {
-            qualityDropdown.value = 3;
-        }
-        if (PlayerPrefs.HasKey("ResolutionPreference"))
-            resolutionDropdown.value = PlayerPrefs.GetInt("ResolutionPreference");
-        else
-        {
-            resolutionDropdown.value = currentResolutionIndex;
-        }
-    }       
-
-
-
 }
     
