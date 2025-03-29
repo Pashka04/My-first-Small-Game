@@ -27,6 +27,9 @@ public class MainMenuAudioManager : MonoBehaviour
 
     private void Start()
     {
+        // Устанавливаем громкость на 10% (0.1f)
+        musicSource.volume = 0.1f;
+        sfxSource.volume = 0.1f;
         PlayMusic("THEME");
     }
 
@@ -72,11 +75,11 @@ public class MainMenuAudioManager : MonoBehaviour
 
     public void MusicVolume(float volume)
     {
-        musicSource.volume = volume;
+        musicSource.volume = Mathf.Clamp(volume, 0f, 1f);
     }
     public void SFXVolume(float volume)
     {
-        sfxSource.volume = volume;
+        sfxSource.volume = Mathf.Clamp(volume, 0f, 1f);
     }
 
 }

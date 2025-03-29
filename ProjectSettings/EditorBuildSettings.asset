@@ -29,7 +29,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/lvl5Boss.unity
     guid: b13057a190844f6438636f5d9e2389c8
-  - enabled: 1
-    path: Assets/Scenes/Congratulations!.unity
-    guid: d8d8f0dda1055c041b807889ba115ee0
   m_configObjects: {}

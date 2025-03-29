@@ -8,6 +8,10 @@ public class CoinBank : MonoBehaviour
 
     private void Awake()
     {
+        
+        //PlayerPrefs.DeleteAll();
+        //Debug.Log("PlayerPrefs очищены!");
+        PlayerPrefs.Save();
         LoadData();
         var textUI = FindObjectOfType<CoinUIHendler>();
         textUI.SetText(GetCoinsCollected().ToString());

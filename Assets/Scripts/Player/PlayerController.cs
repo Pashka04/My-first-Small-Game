@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     float nextAttackTime = 0f;
     public LayerMask enemyLayers;
     private StaminaManager staminaManager;
-    AttackBonus attackBonus;
+    //AttackBonus attackBonus;
     //private bool onWall = false;
 
 

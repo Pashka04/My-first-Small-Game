@@ -15,6 +15,8 @@ public class Shop : MonoBehaviour
 
     private void Awake()
     {
+        //PlayerPrefs.DeleteAll();
+        //Debug.Log("PlayerPrefs очищены!");
         //PlayerPrefs.SetInt("coins", 0);
         AccessUpdate();
         coinBank = FindObjectOfType<CoinBank>();
